@@ -21,7 +21,7 @@ int main(int argc, char** argv)
   int n = atoi(argv[1]);
   int m = atoi(argv[2]);
   int count=0;
-  double timeS=0,sumS=0;
+  double timeS=0,sumS=0,timeSS=0,sumSS=0;
 
   while(count<m){
       double* a = (double*)malloc(n * n * sizeof(double)); // Matrix A
@@ -60,6 +60,7 @@ int main(int argc, char** argv)
 
   double end = get_time();
   timeS+=end-begin;
+  timeSS+=(end-begin)*(end-begin);
   //printf("time: %.6lf sec\n", end - begin);
 
   // Print C for debugging. Comment out the print before measuring the execution time.
@@ -75,11 +76,13 @@ int main(int argc, char** argv)
   //printf("sum: %.6lf\n", sum);
 
   sumS+=sum;
+  sumSS+=sum*sum;
   free(a);
   free(b);
   free(c);
   count++;
   }
-  printf("time average : %.6lf\nsum average : %.6lf\n",timeS/n,sumS/n);
+  printf("time average : %.6lf\nsum average : %.6lf\n",timeS/m,sumS/m);
+  //printf("time V : %lf\nsum V : %lf\n",timeSS/m-(timeS/m)*(timeS/m),sumSS/m-(sumS/m)*(sumS/m));
   return 0;
 }
